@@ -12,14 +12,22 @@ public class Projectile : MonoBehaviour, IPoolable
 
     private void Update()
     {
-        if (target != null)
+        if (target != null && target.gameObject.activeSelf)
         {
             targetPosition = target.position;
         }
+        else
+        {
+            targetPosition = Vector3.zero; 
+        }
 
-        if (targetPosition != null)
+        if (targetPosition != Vector3.zero)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, projectileSpeed * Time.deltaTime);
+        }
+        else
+        {
+            PoolManager.Instance.Return<Projectile>(this);
         }
     }
 
@@ -32,7 +40,6 @@ public class Projectile : MonoBehaviour, IPoolable
 
     public void OnDespawn()
     {
-
     }
 
     public void OnSpawn()
@@ -41,14 +48,14 @@ public class Projectile : MonoBehaviour, IPoolable
 
     public void Shoot(Transform target, Vector3 spawnPoint, float damage)
     {
-        Debug.Log("Shoot Çaalýþtý");
+        //Debug.Log("Shoot Çaalýþtý");
 
-        if (target.position == Vector3.zero)
-        {
-            PoolManager.Instance.Return<Projectile>(this);
+        //if (target.position == Vector3.zero)
+        //{
+        //    PoolManager.Instance.Return<Projectile>(this);
 
-            return;
-        }
+        //    return;
+        //}
 
         this.target = target;
 

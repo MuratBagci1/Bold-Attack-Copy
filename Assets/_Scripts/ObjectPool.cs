@@ -24,6 +24,7 @@ public class ObjectPool<T> where T : MonoBehaviour, IPoolable
     public T Get()
     {
         T obj = pool.Count > 0 ? pool.Dequeue() : GameObject.Instantiate(prefab, parent);
+        obj.name = prefab.name;
         obj.gameObject.SetActive(true);
         obj.OnSpawn();
         return obj;

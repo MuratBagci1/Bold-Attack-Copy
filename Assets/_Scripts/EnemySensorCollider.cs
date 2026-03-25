@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class EnemySensorCollider : MonoBehaviour
 {
-    public static List<Transform> detectedEnemyList;
+    [SerializeField, ReadOnly] public static List<Transform> detectedEnemyList;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class EnemySensorCollider : MonoBehaviour
         if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable component))
         {
             detectedEnemyList.Remove(collision.transform);
+
+            Debug.Log("Enemy Exited Collision");
         }
     }
 }
