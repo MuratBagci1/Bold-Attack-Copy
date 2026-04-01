@@ -15,3 +15,4 @@ MonoBehaviour:
   upgradeName: MACHINE GUN
   upgradeLevel: 1
   upgradeSprite: {fileID: 21300000, guid: 7ed99b178ead940bf9cc24b0b0213517, type: 3}
+  upgradeType: 0

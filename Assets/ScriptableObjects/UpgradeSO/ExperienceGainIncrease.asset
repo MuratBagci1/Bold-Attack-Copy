@@ -15,3 +15,4 @@ MonoBehaviour:
   upgradeName: EXPERIENCE GAIN INCREASE
   upgradeLevel: 1
   upgradeSprite: {fileID: 21300000, guid: 5f01f4f017b369c48812edd68a27fd46, type: 3}
+  upgradeType: 1

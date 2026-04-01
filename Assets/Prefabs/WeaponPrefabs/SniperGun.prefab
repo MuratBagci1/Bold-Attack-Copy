@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SniperGun
       objectReference: {fileID: 0}
+    - target: {fileID: 3741955975308723079, guid: 1266acd3083f3b44d858989cf35978cb, type: 3}
+      propertyPath: weaponSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 7636023d6fe72af4f8012f74da1eaf29, type: 2}
     - target: {fileID: 7016594174948283877, guid: 1266acd3083f3b44d858989cf35978cb, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7

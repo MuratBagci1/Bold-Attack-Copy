@@ -15,3 +15,4 @@ MonoBehaviour:
   upgradeName: MOVEMENT SPEED INCREASE
   upgradeLevel: 1
   upgradeSprite: {fileID: 21300000, guid: d48097a0dcead254ba4ebdb635874538, type: 3}
+  upgradeType: 1

@@ -15,3 +15,4 @@ MonoBehaviour:
   upgradeName: COOLDOWN REDUCTION
   upgradeLevel: 1
   upgradeSprite: {fileID: 21300000, guid: 21870ab7b8097874cbf3e2e57fdf6794, type: 3}
+  upgradeType: 1

@@ -15,3 +15,4 @@ MonoBehaviour:
   upgradeName: TOTAL HEALTH
   upgradeLevel: 1
   upgradeSprite: {fileID: 21300000, guid: db7f3056c0335704ba583aaf4eb0fb48, type: 3}
+  upgradeType: 1

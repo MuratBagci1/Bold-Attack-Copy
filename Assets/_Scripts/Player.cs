@@ -45,17 +45,13 @@ public class Player : MonoBehaviour, IDamageable
 
         weaponsList.Add(pistolTest1);
         weaponsList.Add(pistolTest2);
+        weaponsList.Add(pistolTest3);
 
         Health = damageableSO.health;
         Damage = damageableSO.damage;
         MoveSpeed = damageableSO.moveSpeed;
 
         maxHealth = Health;
-    }
-
-    private void Start()
-    {
-        SetWeapon();
     }
 
     public void TakeDamage(float damage)

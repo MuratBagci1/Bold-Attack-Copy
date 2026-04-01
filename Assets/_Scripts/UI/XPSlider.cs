@@ -12,7 +12,7 @@ public class XPSlider : MonoBehaviour
 
     [SerializeField] private float xpTreshold;
 
-    private bool isLeftoverCoroutineStarted;
+    [SerializeField] private float xpValue;
     public int leftoverXP;
 
     private void Awake()
@@ -31,19 +31,15 @@ public class XPSlider : MonoBehaviour
 
     private void AddXP()
     {
-        if (!(xpSlider.value >= xpTreshold))
+        if (xpSlider.value < xpTreshold)
         {
-            xpSlider.value++;
-        }
-        else if (!isLeftoverCoroutineStarted)
-        {
-            ActionManager.OnXPTresholdReached?.Invoke();
+            UpdateXPSlider(xpValue);
+            if (xpSlider.value >= xpTreshold)
+            {
+                ActionManager.OnXPTresholdReached?.Invoke();
 
-            leftoverXP++;
-
-            isLeftoverCoroutineStarted = true;
-
-            StartCoroutine(AddLeftOver());
+                AddLeftOver();
+            }
         }
         else
         {
@@ -51,16 +47,16 @@ public class XPSlider : MonoBehaviour
         }
     }
 
-    private IEnumerator AddLeftOver()
+    private void UpdateXPSlider(float value)
     {
-        while (xpSlider.value >= xpTreshold)
-        {
-            yield return null;
-        }
+        xpSlider.value += value;
+    }
 
-        xpSlider.value += leftoverXP;
+    private void AddLeftOver()
+    {
+        xpSlider.value = 0;
+        UpdateXPSlider(leftoverXP);
         leftoverXP = 0;
-        isLeftoverCoroutineStarted = false;
     }
 
     private void CreateXPObjectPool()
