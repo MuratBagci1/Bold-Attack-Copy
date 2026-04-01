@@ -19,5 +19,5 @@ public static class ActionManager
 
     public static Action<UpgradeSingleUI> OnUISelected;
 
-    public static Action OnUpgradeReachedFour;
+    public static Action OnNewWave;
 }

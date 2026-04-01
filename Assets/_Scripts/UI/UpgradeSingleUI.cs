@@ -28,14 +28,14 @@ public class UpgradeSingleUI : MonoBehaviour
         initialPos = transform.localPosition;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         ActionManager.OnUISelected += HandleSelectedMovement;
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        upgradeButton.gameObject.SetActive(false);
+        ActionManager.OnUISelected -= HandleSelectedMovement;
     }
 
     private void PopUp()
@@ -55,10 +55,12 @@ public class UpgradeSingleUI : MonoBehaviour
 
     public void SetSingleUpgrade(UpgradeSO upgrade)
     {
-        this.upgrade = Instantiate<UpgradeSO>(upgrade);
+        this.upgrade = upgrade;
         upgradeNameText.text = upgrade.upgradeName;
         upgradeLevelText.text = UPGRADE_LEVEL_TEXT + upgrade.upgradeLevel;
         upgradeImage.sprite = upgrade.upgradeSprite;
+
+        upgradeButton.gameObject.SetActive(false);
 
         PopUp();
     }
@@ -67,14 +69,13 @@ public class UpgradeSingleUI : MonoBehaviour
     {
         upgrade.UpgradeTier();
 
-        if (upgrade.upgradeLevel >= 4)
-            ActionManager.OnUpgradeReachedFour?.Invoke();
-
         ActionManager.OnUISelected(this);
     }
 
     private void HandleSelectedMovement(UpgradeSingleUI upgradeSingleUI)
     {
+        upgradeButton.gameObject.SetActive(false);
+
         if (this == upgradeSingleUI)
         {
             ActionManager.OnGamePausedCancelled?.Invoke();
@@ -84,7 +85,7 @@ public class UpgradeSingleUI : MonoBehaviour
             Shrink();
     }
 
-    public void SelectedAnimation()
+    private void SelectedAnimation()
     {
         transform.DOScale(popScale, moveDuration).SetEase(Ease.InOutQuad).OnComplete(() =>
         {
@@ -95,7 +96,7 @@ public class UpgradeSingleUI : MonoBehaviour
         }).SetUpdate(true);
     }
 
-    public void Shrink()
+    private void Shrink()
     {
         transform.DOScale(shrinkScale, moveDuration).SetEase(Ease.InOutQuad).OnComplete(() =>
         {
@@ -108,5 +109,10 @@ public class UpgradeSingleUI : MonoBehaviour
         transform.localPosition = initialPos;
         transform.localScale = Vector3.one;
         gameObject.SetActive(false);
+    }
+
+    public void Sleep()
+    {
+
     }
 }

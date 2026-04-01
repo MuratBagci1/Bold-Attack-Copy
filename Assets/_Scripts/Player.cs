@@ -59,7 +59,6 @@ public class Player : MonoBehaviour, IDamageable
         Health -= damage;
 
         healthbarUI.ChangeFillAmount(Health / maxHealth);
-        Debug.Log("Damage Taken: " + damage + "new Health: " + Health);
     }
 
     private void SetWeapon()

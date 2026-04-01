@@ -55,8 +55,9 @@ public class GameManager : MonoBehaviour
         ChangeWave();
 
         ActionManager.OnGamePaused += PauseGame;
-        ActionManager.OnGamePausedCancelled += ContinueGame;
+        ActionManager.OnNewWave += PauseGame;
         ActionManager.OnXPTresholdReached += PauseGame;
+        ActionManager.OnGamePausedCancelled += ContinueGame;
     }
 
     private void Update()
@@ -109,5 +110,7 @@ public class GameManager : MonoBehaviour
         currentWave = waveList[0];
 
         waveList.Remove(currentWave);
+
+        ActionManager.OnNewWave?.Invoke();
     }
 }

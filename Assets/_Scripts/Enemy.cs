@@ -91,7 +91,6 @@ public class Enemy : MonoBehaviour, IDamageable, IPoolable
     {
         Health -= damage;
         healthbarUI.ChangeFillAmount(Health / maxHealth);
-        Debug.Log("Damage Taken: " + damage + " new Health: " + Health);
         if (Health <= 0)
         {
             DropEXP();
@@ -121,13 +120,10 @@ public class Enemy : MonoBehaviour, IDamageable, IPoolable
         MoveSpeed = damageableSO.moveSpeed;
 
         healthbarUI.ChangeFillAmount(Health / maxHealth);
-
-        Debug.Log("OnSpawn");
     }
 
     public void OnDespawn()
     {
         EnemySensorCollider.detectedEnemyList.Remove(this.transform);
-        Debug.Log("OnDespawn");
     }
 }

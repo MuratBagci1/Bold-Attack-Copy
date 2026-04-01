@@ -10,44 +10,79 @@ public class UpgradeUI : MonoBehaviour
 
     private List<UpgradeSO> upgradePool;
 
-    private void Start()
+    private void Awake()
     {
-        ActionManager.OnUpgradeReachedFour += SetUpgradePool;
-        ActionManager.OnXPTresholdReached += SetUpgradeSingleUI;
+        upgradePool = new List<UpgradeSO>();
+        SetInitialPool(selectableUpgrades);
     }
 
     private void OnEnable()
     {
-        SetUpgradePool(true);
-        SetUpgradePool();
+        ActionManager.OnXPTresholdReached += ShowAllUpgrades;
+        ActionManager.OnNewWave += ShowWeaponUpgrades;
     }
 
-    private void SetUpgradeSingleUI()
+    private void OnDisable()
     {
-        HashSet<int> usedIndexes = new HashSet<int>();
+        ActionManager.OnXPTresholdReached -= ShowAllUpgrades;
+        ActionManager.OnNewWave -= ShowWeaponUpgrades;
+    }
 
-        foreach (UpgradeSingleUI upgrade in upgradeSlots)
+    private void SetUpgradeSingleUI(List<UpgradeSO> pool)
+    {
+        int usableSlots = Mathf.Min(upgradeSlots.Count, pool.Count);
+
+        //work on this, game doesn't continue
+        if (usableSlots <= 0)
+        {
+            ActionManager.OnGamePausedCancelled?.Invoke();
+            return;
+        }
+
+        HashSet<int> usedIndexes = new HashSet<int>();
+        for (int i = 0; i < usableSlots; i++)
         {
             int index;
 
             do
             {
-                index = Random.Range(0, upgradePool.Count);
+                index = Random.Range(0, pool.Count);
             } while (usedIndexes.Contains(index));
 
             usedIndexes.Add(index);
-            upgrade.SetSingleUpgrade(upgradePool[index]);
+            upgradeSlots[i].SetSingleUpgrade(pool[index]);
         }
     }
 
-    private void SetUpgradePool()
+    private void ShowAllUpgrades()
     {
-        upgradePool = selectableUpgrades.Where(u => u.upgradeLevel < 4).ToList();
+        var pool = GetFilteredPool(false);
+
+        SetUpgradeSingleUI(pool);
+    }
+    private void ShowWeaponUpgrades()
+    {
+        var pool = GetFilteredPool(true);
+
+        SetUpgradeSingleUI(pool);
     }
 
-    private void SetUpgradePool(bool isFirstUpgrade)
+    private List<UpgradeSO> GetFilteredPool(bool onlyWeapons)
     {
-        upgradePool = selectableUpgrades.Where(u => u.upgradeLevel < 4 && u.upgradeType == UpgradeType.weapon).ToList();
-        SetUpgradeSingleUI();
+        var pool = upgradePool.Where(x => x.upgradeLevel < 5);
+
+        if (onlyWeapons)
+            pool = pool.Where(x => x.upgradeType == UpgradeType.weapon);
+
+        return pool.ToList();
+    }
+
+    private void SetInitialPool(List<UpgradeSO> newList)
+    {
+        foreach (UpgradeSO upgrade in selectableUpgrades)
+        {
+            UpgradeSO newUpgrade = Instantiate<UpgradeSO>(upgrade);
+            upgradePool.Add(newUpgrade);
+        }
     }
 }
