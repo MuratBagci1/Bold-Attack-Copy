@@ -6,7 +6,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
 
     [SerializeField] private WeaponSO weaponSO;
-    private float weaponDamage;
+
+    //working on, look at weaponSO and pistolSO
+    public float weaponDamage;
     private float weaponCooldown;
     private float weaponCooldownTimer;
 
@@ -52,6 +54,7 @@ public class Weapon : MonoBehaviour
         Projectile shutProjectile = poolManager.Get<Projectile>(projectilePrefab.GetComponent<Projectile>());
 
         shutProjectile.Shoot(GetClosestEnemy(), projectileSpawnPoint.position, weaponDamage * playerInstance.Damage);
+        Debug.Log("damage: " + weaponDamage.ToString());
     }
 
     private Transform GetClosestEnemy()

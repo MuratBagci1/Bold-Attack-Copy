@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/UpgradeScriptableObject", order = 4)]
-public class UpgradeSO : ScriptableObject
+public abstract class UpgradeSO : ScriptableObject
 {
     public string upgradeName;
     public int upgradeLevel;
@@ -15,6 +12,8 @@ public class UpgradeSO : ScriptableObject
     {
         upgradeLevel += 1;
     }
+
+    public abstract void Apply(GameObject player);
 }
 
 public enum UpgradeType

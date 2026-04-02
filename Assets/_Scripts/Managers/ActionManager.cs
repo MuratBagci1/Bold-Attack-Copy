@@ -15,7 +15,7 @@ public static class ActionManager
 
     public static Action OnXPTresholdReached;
 
-    public static Action<List<GameObject>, Transform> OnWeaponAdded;
+    public static Action<GameObject> OnWeaponAdded;
 
     public static Action<UpgradeSingleUI> OnUISelected;
 

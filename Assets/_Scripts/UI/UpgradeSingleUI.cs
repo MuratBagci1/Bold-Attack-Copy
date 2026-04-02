@@ -78,6 +78,8 @@ public class UpgradeSingleUI : MonoBehaviour
 
         if (this == upgradeSingleUI)
         {
+            upgrade.Apply(Player.instance.gameObject);
+
             ActionManager.OnGamePausedCancelled?.Invoke();
             SelectedAnimation();
         }
@@ -109,10 +111,5 @@ public class UpgradeSingleUI : MonoBehaviour
         transform.localPosition = initialPos;
         transform.localScale = Vector3.one;
         gameObject.SetActive(false);
-    }
-
-    public void Sleep()
-    {
-
     }
 }

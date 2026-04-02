@@ -10,10 +10,6 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField] private DamageableSO damageableSO;
     [SerializeField] private HealthbarUI healthbarUI;
-    [SerializeField] private GameObject pistolTest1;
-    [SerializeField] private GameObject pistolTest2;
-    [SerializeField] private GameObject pistolTest3;
-    [SerializeField] private GameObject pistolTest4;
 
     private float health;
     private float damage;
@@ -42,16 +38,17 @@ public class Player : MonoBehaviour, IDamageable
         instance = this;
 
         weaponsList = new List<GameObject>();
-
-        weaponsList.Add(pistolTest1);
-        weaponsList.Add(pistolTest2);
-        weaponsList.Add(pistolTest3);
-
+        
         Health = damageableSO.health;
         Damage = damageableSO.damage;
         MoveSpeed = damageableSO.moveSpeed;
 
         maxHealth = Health;
+    }
+
+    private void OnEnable()
+    {
+        ActionManager.OnWeaponAdded += SetWeapon;
     }
 
     public void TakeDamage(float damage)
@@ -61,8 +58,9 @@ public class Player : MonoBehaviour, IDamageable
         healthbarUI.ChangeFillAmount(Health / maxHealth);
     }
 
-    private void SetWeapon()
+    private void SetWeapon(GameObject weapon)
     {
-        ActionManager.OnWeaponAdded?.Invoke(weaponsList, transform);
+        weaponsList.Add(weapon);
+        WeaponManager.instance.SetWeaponPlaces(weaponsList, transform);
     }
 }
