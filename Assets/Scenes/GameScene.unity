@@ -1879,8 +1879,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectableUpgrades:
-  - {fileID: 11400000, guid: 5dd707551f5e11645968345341a0461e, type: 2}
+  - {fileID: 11400000, guid: 43701239b16befe48b02fc64b9af49d9, type: 2}
   - {fileID: 11400000, guid: dc1cb301144e76d48b825b3b5b071ab3, type: 2}
+  - {fileID: 11400000, guid: ad6f675b3b580ae4e9363cc9c307f868, type: 2}
   upgradeSlots:
   - {fileID: 1289033828}
   - {fileID: 1959113725}

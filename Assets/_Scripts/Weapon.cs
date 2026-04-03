@@ -5,10 +5,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
 
-    [SerializeField] private WeaponSO weaponSO;
-
     //working on, look at weaponSO and pistolSO
-    public float weaponDamage;
+    private float weaponDamage;
     private float weaponCooldown;
     private float weaponCooldownTimer;
 
@@ -17,8 +15,6 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        weaponDamage = weaponSO.damage;
-        weaponCooldown = weaponSO.cooldown;
         weaponCooldownTimer = 0;
     }
 
@@ -31,6 +27,11 @@ public class Weapon : MonoBehaviour
         poolManager.CreatePool<Projectile>(projectilePrefab.GetComponent<Projectile>(), 5);
     }
 
+    public void Innit(float damage, float cooldown)
+    {
+        weaponDamage = damage;
+        weaponCooldown = cooldown;
+    }
     private void Update()
     {
         if (weaponCooldownTimer > 0)

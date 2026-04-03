@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1185bd102f75297429d8e8f1dcca5ae8, type: 3}
-  m_Name: MachineGun
+  m_Script: {fileID: 11500000, guid: ea09a5e326f24da49b7800f82328fd06, type: 3}
+  m_Name: TotalDamageSO
   m_EditorClassIdentifier: 
-  upgradeName: MACHINE GUN
+  upgradeName: Total Damage
   upgradeLevel: 1
-  upgradeSprite: {fileID: 21300000, guid: 7ed99b178ead940bf9cc24b0b0213517, type: 3}
-  upgradeType: 0
+  upgradeSprite: {fileID: 0}
+  upgradeType: 1
+  isInitiated: 0
+  increasePercentage: 20

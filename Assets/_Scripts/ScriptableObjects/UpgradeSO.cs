@@ -7,6 +7,7 @@ public abstract class UpgradeSO : ScriptableObject
     public int upgradeLevel;
     public Sprite upgradeSprite;
     public UpgradeType upgradeType;
+    public bool isInitiated;
 
     public void UpgradeTier()
     {
