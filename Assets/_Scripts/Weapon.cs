@@ -27,11 +27,15 @@ public class Weapon : MonoBehaviour
         poolManager.CreatePool<Projectile>(projectilePrefab.GetComponent<Projectile>(), 5);
     }
 
-    public void Innit(float damage, float cooldown)
+    private void OnEnable()
     {
-        weaponDamage = damage;
-        weaponCooldown = cooldown;
+        ActionManager.OnUpgradeApplied += UpgradeDamage;
     }
+    private void OnDisable()
+    {
+        ActionManager.OnUpgradeApplied -= UpgradeDamage;
+    }
+
     private void Update()
     {
         if (weaponCooldownTimer > 0)
@@ -84,5 +88,11 @@ public class Weapon : MonoBehaviour
         float rotationSpeed = 180f;
 
         transform.localRotation = Quaternion.RotateTowards(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void UpgradeDamage(float damage, float cooldown)
+    {
+        weaponDamage = damage;
+        weaponCooldown = cooldown;
     }
 }

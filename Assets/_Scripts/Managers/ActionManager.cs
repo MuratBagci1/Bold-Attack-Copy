@@ -20,4 +20,6 @@ public static class ActionManager
     public static Action<UpgradeSingleUI> OnUISelected;
 
     public static Action OnNewWave;
+
+    public static Action<float, float> OnUpgradeApplied;
 }

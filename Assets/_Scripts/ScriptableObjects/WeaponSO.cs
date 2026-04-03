@@ -16,14 +16,14 @@ public class WeaponSO : UpgradeSO
         {
             GameObject weaponTemp = Instantiate(weaponPrefab, player.gameObject.transform);
             ActionManager.OnWeaponAdded?.Invoke(weaponTemp);
-
-            weaponTemp.GetComponent<Weapon>().Innit(damage, cooldown);
+            ActionManager.OnUpgradeApplied?.Invoke(damage, cooldown);
 
             isInitiated = true;
         }
         else
         {
             damage += increase;
+            ActionManager.OnUpgradeApplied?.Invoke(damage, cooldown);
         }
     }
 }

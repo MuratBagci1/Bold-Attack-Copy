@@ -16,8 +16,8 @@ MonoBehaviour:
   upgradeLevel: 1
   upgradeSprite: {fileID: 21300000, guid: 2035e66b93963cb4498ad33adec4063b, type: 3}
   upgradeType: 0
-  weaponPrefab: {fileID: 2201717129521592778, guid: 20eb2dfd057f0b145975595b26db555d, type: 3}
+  isInitiated: 0
+  weaponPrefab: {fileID: 2201717129521592778, guid: 1b73b869200b8a34799b8e69243fa054, type: 3}
   increase: 0.5
   cooldown: 1
   damage: 2
-  isInitiated: 0
